@@ -11,7 +11,7 @@ import java.io.IOException;
 @Component
 public class ApiKeyFilter implements Filter {
 
-    private static final String API_KEY_HEADER = "";
+    private static final String API_KEY_HEADER = "x-api-key";
     private static final String API_KEY = "8c3ede4e-66c1-4da7-841f-795b75bb5e2c";
 
     @Override
