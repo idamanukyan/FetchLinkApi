@@ -23,7 +23,15 @@ public class ApiKeyFilter implements Filter {
         HttpServletRequest httpRequest = (HttpServletRequest) request;
         HttpServletResponse httpResponse = (HttpServletResponse) response;
 
+        // Try to get the API key from the header first
         String apiKey = httpRequest.getHeader(API_KEY_HEADER);
+
+        // If the API key is not found in the header, check the query parameters
+        if (apiKey == null) {
+            apiKey = httpRequest.getParameter("api_key");
+        }
+
+        System.out.println("API Key received: " + apiKey); // Log the received API key
 
         if (API_KEY.equals(apiKey)) {
             chain.doFilter(request, response);
@@ -32,5 +40,6 @@ public class ApiKeyFilter implements Filter {
             httpResponse.getWriter().write("Unauthorized");
         }
     }
+
 }
 
