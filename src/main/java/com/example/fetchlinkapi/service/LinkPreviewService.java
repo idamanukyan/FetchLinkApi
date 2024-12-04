@@ -38,7 +38,7 @@ public class LinkPreviewService {
         // Extract subtitle from the h2 tag with class 'h5 tc p-0 mb-2 pb-1'
         String subtitle = document.select("h2.h5.tc.p-0.mb-2.pb-1").text();
         if (subtitle.isEmpty()) {
-            subtitle = "No subtitle available";
+            subtitle = "";
         }
 
         // Extract price from the p tag with class 'price' and em tag within it
