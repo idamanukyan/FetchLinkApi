@@ -15,13 +15,13 @@ public class LinkPreviewService {
     public LinkPreview extractPreview(String url) throws Exception {
         Document document = fetchHTML(url);
 
-        // Extract title from the h1 tag with class 'h2 normal black tc p-0 mt-1 m-0'
-        String title = document.select("h1.h2.normal.black.tc.p-0.mt-1.m-0").text();
-        if (title.isEmpty()) {
-            title = document.select("meta[property=og:title]").attr("content");
+        // Extract titles from the h1 tag with class 'h2 normal black tc p-0 mt-1 m-0'
+        String titles = document.select("h1.h2.normal.black.tc.p-0.mt-1.m-0").text();
+        if (titles.isEmpty()) {
+            titles = document.select("meta[property=og:titles]").attr("content");
         }
-        if (title.isEmpty()) {
-            title = document.select("h1.h2.normal.black.tc.p-0.mt-1.mb-2").text();
+        if (titles.isEmpty()) {
+            titles = document.select("h1.h2.normal.black.tc.p-0.mt-1.mb-2").text();
         }
         // Extract description from the div with class 'text'
         String description = document.select("div.text").text();
@@ -55,7 +55,7 @@ public class LinkPreviewService {
             logo = document.select("link[rel=icon]").attr("href"); // Fallback to favicon
         }
 
-        return new LinkPreview(url, title, mainPhoto, subtitle, price, logo, description);
+        return new LinkPreview(url, titles, mainPhoto, subtitle, price, logo, description);
     }
 }
 
